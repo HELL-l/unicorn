@@ -35,7 +35,7 @@ jobs:
               mingw: MINGW64,
               mingw-arch: x86_64,
               artifact: 'windows_mingw64-shared.7z',
-              build_type: 'Debug',
+              build_type: 'Release',
               archiver: '7z a',
               generators: 'Ninja'
             }
@@ -49,7 +49,7 @@ jobs:
               mingw: MINGW64,
               mingw-arch: x86_64,
               artifact: 'windows_mingw64-static.7z',
-              build_type: 'Debug',
+              build_type: 'Release',
               archiver: '7z a',
               generators: 'Ninja'
             }
@@ -90,7 +90,7 @@ jobs:
               msvc-arch: x64,
               artifact: 'windows_msvc64_shared.7z',
               shared: 'yes',
-              build_type: 'Debug',
+              build_type: 'Release',
               archiver: '7z a',
               generators: 'Visual Studio 16 2019'
             }
@@ -103,7 +103,7 @@ jobs:
               msvc-arch: x86,
               artifact: 'windows_msvc32_shared.7z',
               shared: 'yes',
-              build_type: 'Debug',
+              build_type: 'Release',
               archiver: '7z a',
               generators: 'Visual Studio 16 2019'
             }
@@ -116,7 +116,7 @@ jobs:
               msvc-arch: x64,
               artifact: 'windows_msvc64_static.7z',
               shared: 'no',
-              build_type: 'Debug',
+              build_type: 'Release',
               archiver: '7z a',
               generators: 'Visual Studio 16 2019'
             }
@@ -129,7 +129,7 @@ jobs:
               msvc-arch: x86,
               artifact: 'windows_msvc32_static.7z',
               shared: 'no',
-              build_type: 'Debug',
+              build_type: 'Release',
               archiver: '7z a',
               generators: 'Visual Studio 16 2019'
             }
@@ -178,7 +178,7 @@ jobs:
         cmake --build . --config ${{ matrix.config.build_type }}
         cmake --install . --strip --config ${{ matrix.config.build_type }}
         ctest -VV -C ${{ matrix.config.build_type }}
-        mv Debug instdir
+        mv Release instdir
 
     - name: '🛠️ Win MSVC 32 setup'
       if: contains(matrix.config.name, 'MSVC 32')
@@ -205,7 +205,7 @@ jobs:
         cmake --build . --config ${{ matrix.config.build_type }}
         cmake --install . --strip --config ${{ matrix.config.build_type }}
         ctest -VV -C ${{ matrix.config.build_type }}
-        mv Debug instdir
+        mv Release instdir
 
     - name: '🚧 Win MINGW build'
       if: contains(matrix.config.mingw, 'MINGW')
